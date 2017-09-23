@@ -1,5 +1,5 @@
 /** Copyright 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016 Roland Olbricht et al.
- * 
+ *
  * This file is part of Overpass_API.
  *
  * Overpass_API is free software: you can redistribute it and/or modify
@@ -40,14 +40,14 @@ struct OSM_File_Properties : public File_Properties
   OSM_File_Properties(const std::string& file_base_name_, uint32 block_size_,
 		      uint32 map_block_size_)
     : file_base_name(file_base_name_), block_size(block_size_), map_block_size(map_block_size_) {}
-  
+
   const std::string& get_file_name_trunk() const { return file_base_name; }
-  
+
   const std::string& get_index_suffix() const { return basic_settings().INDEX_SUFFIX; }
   const std::string& get_data_suffix() const { return basic_settings().DATA_SUFFIX; }
-  const std::string& get_id_suffix() const { return basic_settings().ID_SUFFIX; }  
+  const std::string& get_id_suffix() const { return basic_settings().ID_SUFFIX; }
   const std::string& get_shadow_suffix() const { return basic_settings().SHADOW_SUFFIX; }
-  
+
   uint32 get_block_size() const { return block_size/8; }
   uint32 get_compression_factor() const { return 8; }
   uint32 get_compression_method() const { return basic_settings().compression_method; }
@@ -274,7 +274,7 @@ void show_mem_status()
 Logger::Logger(const std::string& db_dir)
 {
   std::string& filename = basic_settings().logfile_name;
-  logfile_full_name = filename[0] == '/' ? filename : db_dir + filename;
+  logfile_full_name = "/dev/stdout";//filename[0] == '/' ? filename : db_dir + filename;
 }
 
 void Logger::annotated_log(const std::string& message)
@@ -293,7 +293,7 @@ void Logger::annotated_log(const std::string& message)
 
 void Logger::raw_log(const std::string& message)
 {
-  std::ofstream out(logfile_full_name.c_str(), std::ios_base::app);
+  std::ofstream out("/dev/stdout", std::ios_base::app);
   out<<message<<'\n';
 }
 

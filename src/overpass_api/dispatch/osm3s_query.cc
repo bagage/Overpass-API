@@ -56,6 +56,13 @@ int main(int argc, char *argv[])
   int area_level = 0;
   bool respect_timeout = true;
 
+  std::cout << "coucou\n";
+    Logger logger("hey");
+    std::ostringstream out;
+    out<<"plop";
+    logger.annotated_log(out.str());
+
+
   int argpos = 1;
   while (argpos < argc)
   {
@@ -234,14 +241,14 @@ int main(int argc, char *argv[])
     if (e.origin != "Dispatcher_Stub::Dispatcher_Stub::1")
     {
       std::ostringstream temp;
-      
+
       if (e.origin == "Dispatcher_Client::1")
         temp<<"The dispatcher (i.e. the database management system) is turned off.";
       else if (e.error_number == 0)
         temp<<"open64: "<<e.filename<<' '<<e.origin;
       else
         temp<<"open64: "<<e.error_number<<' '<<strerror(e.error_number)<<' '<<e.filename<<' '<<e.origin;
-      
+
       if (error_output)
         error_output->runtime_error(temp.str());
     }
