@@ -272,7 +272,10 @@ void show_mem_status()
 //-----------------------------------------------------------------------------
 
 Logger::Logger(const std::string& db_dir)
-  : logfile_full_name(db_dir + basic_settings().logfile_name) {}
+{
+  std::string& filename = basic_settings().logfile_name;
+  logfile_full_name = filename[0] == '/' ? filename : db_dir + filename;
+}
 
 void Logger::annotated_log(const std::string& message)
 {
